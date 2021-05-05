@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://collectables/cookie/Cookie.gd" type="Script" id=2]
+[ext_resource path="res://collectables/cookie/cookie.png" type="Texture" id=4]
+[ext_resource path="res://effects/cookie/cookie_1.wav" type="AudioStream" id=44]
+[ext_resource path="res://classes/SoundClass.gd" type="Script" id=45]
+[ext_resource path="res://effects/cookie/cookie_2.wav" type="AudioStream" id=46]
+[ext_resource path="res://effects/cookie/cookie_3.wav" type="AudioStream" id=47]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 26.6329
+
+[sub_resource type="ParticlesMaterial" id=2]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 38.43
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 26.53
+scale = 0.3
+
+[node name="Cookie" type="Area2D"]
+monitorable = false
+collision_layer = 128
+script = ExtResource( 2 )
+
+[node name="Cookie_Sprite" type="Sprite" parent="."]
+texture = ExtResource( 4 )
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.457108, -0.36491 )
+shape = SubResource( 1 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 0.46822, 0.561863 )
+scale = Vector2( 0.42877, 0.400677 )
+
+[node name="Cookie_Sound" type="AudioStreamPlayer" parent="."]
+volume_db = -80.0
+script = ExtResource( 45 )
+sounds = [ ExtResource( 44 ), ExtResource( 46 ), ExtResource( 47 ) ]
+
+[node name="Particles2D" type="Particles2D" parent="."]
+amount = 3
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 2 )
+texture = ExtResource( 4 )
+[connection signal="body_entered" from="." to="." method="_on_Cookie_body_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

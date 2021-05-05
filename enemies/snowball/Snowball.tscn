@@ -1,0 +1,78 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://enemies/snowball/snowball.png" type="Texture" id=1]
+[ext_resource path="res://enemies/snowball/Snowball.gd" type="Script" id=2]
+[ext_resource path="res://classes/SpriteClass.gd" type="Script" id=3]
+[ext_resource path="res://enemies/snowball/2.png" type="Texture" id=4]
+[ext_resource path="res://enemies/snowball/1.png" type="Texture" id=5]
+[ext_resource path="res://enemies/snowball/3.png" type="Texture" id=6]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0.617284, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 46.1376
+
+[node name="Snowball" type="KinematicBody2D" groups=[
+"enemie",
+]]
+collision_layer = 32
+script = ExtResource( 2 )
+
+[node name="DieParticles" type="CPUParticles2D" parent="."]
+position = Vector2( -6.28513, -1.93948 )
+emitting = false
+amount = 46
+lifetime = 4.0
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource( 1 )
+emission_shape = 1
+emission_sphere_radius = 51.75
+direction = Vector2( -1, -0.5 )
+spread = 30.0
+gravity = Vector2( 0, 9 )
+initial_velocity = 174.48
+initial_velocity_random = 1.0
+angular_velocity = -58.62
+angular_velocity_random = 1.0
+damping = 20.69
+angle = 303.3
+angle_random = 1.0
+scale_amount = 0.2
+scale_amount_random = 0.3
+color_ramp = SubResource( 1 )
+
+[node name="Snowball_Sprite" type="Sprite" parent="."]
+script = ExtResource( 3 )
+sprite = [ ExtResource( 5 ), ExtResource( 4 ), ExtResource( 6 ) ]
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 53.8427, -1.80801 )
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( -1.87288, -0.374573 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Particles" type="CPUParticles2D" parent="CanvasLayer"]
+position = Vector2( -92.3279, 0.0687103 )
+amount = 32
+texture = ExtResource( 5 )
+direction = Vector2( -1, -1 )
+spread = 34.0
+initial_velocity = 140.0
+initial_velocity_random = 1.0
+angular_velocity = -58.62
+angular_velocity_random = 1.0
+scale_amount = 0.2
+scale_amount_random = 0.2
+color_ramp = SubResource( 1 )
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

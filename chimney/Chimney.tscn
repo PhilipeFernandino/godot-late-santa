@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://chimney/Chimney.gd" type="Script" id=1]
+[ext_resource path="res://chimney/back.png" type="Texture" id=2]
+[ext_resource path="res://effects/gift_delivered/gift_delivered.wav" type="AudioStream" id=3]
+[ext_resource path="res://chimney/chimney.png" type="Texture" id=4]
+[ext_resource path="res://classes/SoundClass.gd" type="Script" id=6]
+
+[sub_resource type="SegmentShape2D" id=1]
+a = Vector2( 49.5656, 71.9434 )
+b = Vector2( -22.8332, 71.3822 )
+
+[node name="Chimney" type="KinematicBody2D" groups=[
+"chimney",
+"deletable",
+]]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource( 1 )
+
+[node name="Chimney_Sprite" type="Sprite" parent="."]
+position = Vector2( 61.5616, 333.34 )
+texture = ExtResource( 4 )
+offset = Vector2( -52, -152 )
+
+[node name="Chimney_Sprite2" type="Sprite" parent="."]
+position = Vector2( 58.0612, 31.4041 )
+z_index = -3
+z_as_relative = false
+texture = ExtResource( 2 )
+offset = Vector2( -52, -152 )
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( -6.76096, -45.2433 )
+polygon = PoolVector2Array( 57.8246, -77.9801, 67.589, -74.8304, 70.4238, -58.1364, 70.4238, -24.7485, 61.6798, 6.14169, 60, 152, -45.2281, 152.695, -43.0008, 5.69624, -55.4734, 4.80534, -47.6938, -16.559, -53.3635, -23.4886, -55.2533, -37.3477, -53.6784, -70.7356, -48.9537, -76.7202, -42.0242, -78.6101, -22.9556, -16.5762, 44.7527, -17.4671 )
+
+[node name="Deliver_Area2D" type="Area2D" parent="."]
+position = Vector2( 1.23904, -117.244 )
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Deliver_Area2D"]
+position = Vector2( -12, -28 )
+shape = SubResource( 1 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 407.244, 36.9537 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -10.0
+script = ExtResource( 6 )
+sounds = [ ExtResource( 3 ) ]
+[connection signal="body_entered" from="Deliver_Area2D" to="." method="_on_Deliver_Area2D_body_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

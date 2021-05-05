@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://interface/scripts/Music.gd" type="Script" id=1]
+[ext_resource path="res://interface/sprites/menus/config_menu/music_off_icon.png" type="Texture" id=2]
+[ext_resource path="res://interface/sprites/menus/config_menu/music_icon.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 70, 70 )
+
+[node name="Music" type="TouchScreenButton"]
+position = Vector2( -88.9407, -91.711 )
+normal = ExtResource( 3 )
+shape = SubResource( 1 )
+script = ExtResource( 1 )
+textures = [ ExtResource( 3 ), ExtResource( 2 ) ]
+[connection signal="pressed" from="." to="." method="_on_Music_pressed"]

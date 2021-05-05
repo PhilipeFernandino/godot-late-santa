@@ -1,0 +1,107 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://main/scripts/Main.gd" type="Script" id=1]
+[ext_resource path="res://scenario/Background.tscn" type="PackedScene" id=2]
+[ext_resource path="res://interface/sprites/logo.png" type="Texture" id=3]
+[ext_resource path="res://interface/sprites/splashscreen.png" type="Texture" id=4]
+[ext_resource path="res://music/main_menu.ogg" type="AudioStream" id=5]
+[ext_resource path="res://main/scripts/AnimationPlayer.gd" type="Script" id=6]
+[ext_resource path="res://interface/scenes/MainMenu.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenario/Atmosphere.tscn" type="PackedScene" id=8]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Lampejo"
+length = 4.5
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Logo:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4, 1, 3.6, 4 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("CanvasModulate:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 4, 4.5 )
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 4.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "start_music"
+} ]
+}
+
+[node name="Main" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Lampejo"
+anims/Lampejo = SubResource( 1 )
+script = ExtResource( 6 )
+
+[node name="Background" parent="." instance=ExtResource( 2 )]
+
+[node name="Atmosphere" parent="." instance=ExtResource( 8 )]
+layer = -1
+
+[node name="StartScreen_UI" parent="." instance=ExtResource( 7 )]
+margin_left = -2.0
+margin_top = -2.0
+margin_right = 1884.0
+margin_bottom = 1049.0
+
+[node name="LateSantaLogo" parent="StartScreen_UI" index="0"]
+position = Vector2( 960, 263.806 )
+
+[node name="StartGameButton" parent="StartScreen_UI" index="1"]
+margin_left = 2.0
+margin_top = -571.0
+margin_right = 2.0
+margin_bottom = -7.0
+
+[node name="Sprite" parent="StartScreen_UI/StartGameButton" index="0"]
+position = Vector2( 717.402, 286.601 )
+
+[node name="Configuration" parent="StartScreen_UI" index="4"]
+visible = false
+
+[node name="CanvasModulate" type="Sprite" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( -45.3571, -45.3571 )
+scale = Vector2( 1.02361, 1.04196 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="Logo" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+autoplay = true
+bus = "Music"
+[connection signal="animation_finished" from="AnimationPlayer" to="AnimationPlayer" method="_on_AnimationPlayer_animation_finished"]
+
+[editable path="StartScreen_UI"]

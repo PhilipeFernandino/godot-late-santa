@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://achievement/icons/first_gift.png" type="Texture" id=1]
+[ext_resource path="res://achievement/holder.png" type="Texture" id=2]
+[ext_resource path="res://achievement/AchievementLabel.tscn" type="PackedScene" id=3]
+
+[node name="Achievement" type="TextureRect"]
+margin_left = 0.874451
+margin_top = -0.0852203
+margin_right = 186.874
+margin_bottom = 83.9148
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icon" type="TextureRect" parent="."]
+margin_left = 21.376
+margin_top = 18.5632
+margin_right = 127.376
+margin_bottom = 130.563
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" parent="." instance=ExtResource( 3 )]
+margin_left = 81.139
+margin_top = 45.5996
+margin_right = 242.139
+margin_bottom = 80.5996
+custom_colors/font_color = Color( 0.533333, 0.533333, 0.533333, 1 )
+custom_colors/font_color_shadow = Color( 0.247059, 0.247059, 0.247059, 1 )
+text = "THE FIRST STEP"

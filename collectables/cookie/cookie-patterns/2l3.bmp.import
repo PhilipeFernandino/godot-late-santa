@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/2l3.bmp-7a84ab4759ad63e9d4d88b268a5354ed.res"
+
+[deps]
+
+source_file="res://collectables/cookie/cookie-patterns/2l3.bmp"
+dest_files=[ "res://.import/2l3.bmp-7a84ab4759ad63e9d4d88b268a5354ed.res" ]
+
+[params]
+
+create_from=0
+threshold=0.5

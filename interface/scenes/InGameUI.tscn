@@ -1,0 +1,284 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://achievement/AchievementControl.tscn" type="PackedScene" id=1]
+[ext_resource path="res://interface/scripts/Swipe.gd" type="Script" id=2]
+[ext_resource path="res://interface/scripts/CookiePlacar.gd" type="Script" id=3]
+[ext_resource path="res://interface/scripts/MovSwipe.gd" type="Script" id=4]
+[ext_resource path="res://interface/scripts/GiftPlacar.gd" type="Script" id=5]
+[ext_resource path="res://interface/scripts/IngameUI.gd" type="Script" id=6]
+[ext_resource path="res://fonts/Lora-Medium.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://interface/sprites/menus/ingame_menu/home.png" type="Texture" id=8]
+[ext_resource path="res://interface/sprites/holders/cookie_holder.png" type="Texture" id=9]
+[ext_resource path="res://interface/sprites/menus/ingame_menu/play.png" type="Texture" id=10]
+[ext_resource path="res://interface/sprites/menus/ingame_menu/right.png" type="Texture" id=11]
+[ext_resource path="res://interface/sprites/menus/ingame_menu/restart.png" type="Texture" id=12]
+[ext_resource path="res://interface/sprites/holders/gift_holder.png" type="Texture" id=14]
+[ext_resource path="res://interface/sprites/buttons/pause.png" type="Texture" id=18]
+
+[sub_resource type="Animation" id=1]
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Menu:margin_bottom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 2547.27, -0.25, 0, 0.25, 0, 1280.97, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Menu:margin_top")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1092.27, -0.25, 0, 0.25, 0, -89.0898, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "UI_show"
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Placar:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( -2.0127, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Placar:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -19.444, -0.25, 0, 0.25, 0, 282.975, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 420, 420 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 422.461, 427.942 )
+
+[sub_resource type="DynamicFontData" id=5]
+font_path = "res://fonts/Lora-Medium.ttf"
+
+[sub_resource type="DynamicFont" id=6]
+size = 80
+use_filter = true
+font_data = SubResource( 5 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 49
+use_filter = true
+font_data = ExtResource( 7 )
+
+[node name="InGameUI" type="CanvasLayer"]
+pause_mode = 2
+script = ExtResource( 6 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Menu_show = SubResource( 1 )
+anims/UI_show = SubResource( 2 )
+
+[node name="Config_Button" type="TouchScreenButton" parent="."]
+position = Vector2( 11.9565, -289.738 )
+normal = ExtResource( 18 )
+
+[node name="ReleaseGift_Button" type="TouchScreenButton" parent="."]
+position = Vector2( 1080, 242.421 )
+shape = SubResource( 3 )
+script = ExtResource( 2 )
+
+[node name="MovSwipe" type="Area2D" parent="."]
+position = Vector2( 420.474, 670.937 )
+monitoring = false
+monitorable = false
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovSwipe"]
+shape = SubResource( 4 )
+
+[node name="Menu" type="TextureRect" parent="."]
+margin_left = 1330.28
+margin_top = 1092.27
+margin_right = 2471.28
+margin_bottom = 2547.27
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Menu"]
+remote_path = NodePath("../../Blur")
+update_rotation = false
+update_scale = false
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu"]
+margin_left = 65.0
+margin_top = 670.0
+margin_right = 553.0
+margin_bottom = 1095.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MarginContainer"]
+margin_right = 488.0
+margin_bottom = 425.0
+custom_constants/separation = 16
+
+[node name="Home_Button" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+margin_right = 488.0
+margin_bottom = 127.0
+icon = ExtResource( 8 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Home_Label" type="Label" parent="Menu/MarginContainer/VBoxContainer/Home_Button"]
+anchor_left = -0.0591792
+anchor_top = -0.290522
+anchor_right = -0.0591792
+anchor_bottom = -0.290522
+margin_left = 175.05
+margin_top = 49.8962
+margin_right = 435.05
+margin_bottom = 224.897
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.0980392 )
+text = "Home"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Restart_Button" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+margin_top = 143.0
+margin_right = 488.0
+margin_bottom = 270.0
+icon = ExtResource( 12 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Restart_Label" type="Label" parent="Menu/MarginContainer/VBoxContainer/Restart_Button"]
+anchor_left = -0.0591794
+anchor_top = -0.371604
+anchor_right = -0.0591793
+anchor_bottom = -0.371604
+margin_left = 175.05
+margin_top = 60.0
+margin_right = 450.05
+margin_bottom = 269.0
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.0980392 )
+text = "Restart
+"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Resume_Button" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+margin_top = 286.0
+margin_right = 488.0
+margin_bottom = 413.0
+icon = ExtResource( 10 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Resume_Label" type="Label" parent="Menu/MarginContainer/VBoxContainer/Resume_Button"]
+anchor_left = -0.0591796
+anchor_top = -0.367063
+anchor_right = -0.0591796
+anchor_bottom = -0.367063
+margin_left = 175.05
+margin_top = 60.0
+margin_right = 471.05
+margin_bottom = 163.0
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.0980392 )
+text = "Resume"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Achievement" parent="." instance=ExtResource( 1 )]
+margin_left = 867.0
+margin_top = -87.2375
+margin_right = 1053.0
+margin_bottom = -3.23749
+
+[node name="Placar" type="MarginContainer" parent="."]
+margin_left = -2.0127
+margin_top = -19.444
+margin_right = -2.0127
+margin_bottom = -19.444
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GiftPlacar" type="Sprite" parent="Placar"]
+position = Vector2( 58.9203, -134.54 )
+texture = ExtResource( 14 )
+script = ExtResource( 5 )
+
+[node name="GiftPlacar_Label" type="Label" parent="Placar/GiftPlacar"]
+margin_left = 57.0
+margin_top = -25.6376
+margin_right = 178.999
+margin_bottom = 64.3617
+size_flags_horizontal = 13
+size_flags_vertical = 12
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 0.929412, 0.615686, 0.0588235, 1 )
+custom_colors/font_color_shadow = Color( 0.866667, 0.529412, 0.0431373, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = -1
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CookiePlacar" type="Sprite" parent="Placar"]
+position = Vector2( 53.6115, -39.7423 )
+scale = Vector2( 0.670816, 0.670816 )
+texture = ExtResource( 9 )
+script = ExtResource( 3 )
+
+[node name="CookiePlacar_Label" type="Label" parent="Placar/CookiePlacar"]
+margin_left = 57.0
+margin_top = -29.4416
+margin_right = 178.999
+margin_bottom = 60.5577
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 0.8, 0.580392, 0.337255, 1 )
+custom_colors/font_color_shadow = Color( 0.537255, 0.364706, 0.196078, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = -1
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Placar"]
+position = Vector2( 13.9692, -270.294 )
+remote_path = NodePath("../../Config_Button")
+[connection signal="pressed" from="Config_Button" to="." method="_on_Config_Button_pressed"]
+[connection signal="pressed" from="ReleaseGift_Button" to="ReleaseGift_Button" method="_on_ReleaseGift_Button_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Home_Button" to="." method="_on_Quit_Button_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Restart_Button" to="." method="_on_Restart_Button_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Resume_Button" to="." method="_on_Resume_Button_pressed"]

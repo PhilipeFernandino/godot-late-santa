@@ -1,0 +1,120 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://interface/sprites/menus/gameover_menu/ad_play.png" type="Texture" id=1]
+[ext_resource path="res://interface/sprites/menus/gameover_menu/home.png" type="Texture" id=2]
+[ext_resource path="res://interface/sprites/menus/gameover_menu/restart.png" type="Texture" id=3]
+[ext_resource path="res://interface/scripts/GameOver.gd" type="Script" id=4]
+[ext_resource path="res://interface/scripts/GameOver_UI.gd" type="Script" id=5]
+[ext_resource path="res://interface/sprites/menus/gameover_menu/under_bar.png" type="Texture" id=6]
+[ext_resource path="res://interface/sprites/menus/gameover_menu/progress.png" type="Texture" id=7]
+[ext_resource path="res://interface/sprites/menus/gameover_menu/tex.png" type="Texture" id=8]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://fonts/AnticSlab-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 44
+font_data = SubResource( 1 )
+
+[node name="GameOver_UI" type="CanvasLayer"]
+script = ExtResource( 5 )
+
+[node name="Container" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -140.0
+margin_right = 20.0
+margin_bottom = -100.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Container"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -331.0
+margin_top = -174.5
+margin_right = 331.0
+margin_bottom = -107.5
+rect_pivot_offset = Vector2( 330.988, -0.231277 )
+custom_fonts/font = SubResource( 2 )
+text = "Você foi atingido"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HorizontalBox" type="HBoxContainer" parent="Container"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -281.0
+margin_top = -106.5
+margin_right = 281.0
+margin_bottom = 106.5
+custom_constants/separation = 90
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Revive" type="Button" parent="Container/HorizontalBox"]
+margin_right = 133.0
+margin_bottom = 213.0
+icon = ExtResource( 1 )
+flat = true
+
+[node name="Restart" type="Button" parent="Container/HorizontalBox"]
+margin_left = 223.0
+margin_right = 355.0
+margin_bottom = 213.0
+icon = ExtResource( 3 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Home" type="Button" parent="Container/HorizontalBox"]
+margin_left = 445.0
+margin_right = 578.0
+margin_bottom = 213.0
+icon = ExtResource( 2 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar" type="TextureProgress" parent="Container"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -270.5
+margin_top = -90.6354
+margin_right = 270.5
+margin_bottom = -78.6354
+max_value = 1000.0
+texture_under = ExtResource( 6 )
+texture_progress = ExtResource( 7 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Particles" type="CPUParticles2D" parent="Container/Bar"]
+position = Vector2( 537.636, 6.90265 )
+amount = 40
+texture = ExtResource( 8 )
+emission_shape = 1
+emission_sphere_radius = 5.0
+direction = Vector2( 0, -1 )
+spread = 12.39
+[connection signal="pressed" from="Container/HorizontalBox/Revive" to="." method="_on_Revive_pressed"]
+[connection signal="pressed" from="Container/HorizontalBox/Restart" to="." method="_on_Restart_pressed"]
+[connection signal="pressed" from="Container/HorizontalBox/Home" to="." method="_on_Home_pressed"]

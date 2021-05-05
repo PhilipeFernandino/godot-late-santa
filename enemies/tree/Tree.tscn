@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://enemies/tree/Tree.gd" type="Script" id=2]
+[ext_resource path="res://enemies/tree/textures/tree_3.png" type="Texture" id=3]
+
+[node name="Tree" type="Area2D" groups=[
+"deletable",
+"tree",
+]]
+modulate = Color( 0.596078, 0.85098, 1, 1 )
+script = ExtResource( 2 )
+tree = [ ExtResource( 3 ) ]
+
+[node name="Tree_Sprite" type="Sprite" parent="."]
+modulate = Color( 0.815686, 0.823529, 1, 1 )
+position = Vector2( 0, -150 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 3 )
+offset = Vector2( 2.66667, 237.333 )
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( 4, 152 )
+polygon = PoolVector2Array( -232, 292, -4, -304, 236, 252, 148, 352, -68, 384 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 212, 392 )
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

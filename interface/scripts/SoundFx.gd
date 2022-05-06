@@ -9,6 +9,11 @@ var config_data
 
 func _ready():
 	config_data = SaveAndLoad.load_data("user://config.bin")
+	if !config_data:
+		config_data = {
+			"music" : true,
+			"soundfx" : true
+	}
 	set_volume()
 	
 func set_volume():

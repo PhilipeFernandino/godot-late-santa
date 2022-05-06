@@ -9,10 +9,14 @@ var config_data
 
 func _ready():
 	config_data = SaveAndLoad.load_data("user://config.bin")
+	if !config_data:
+		config_data = {
+			"music" : true,
+			"soundfx" : true
+		}
 	set_volume()
 	
 func set_volume():
-	print(config_data.music)
 	if config_data.music:
 		set_texture(0)
 		AudioServer.set_bus_volume_db(1, 0)
@@ -20,6 +24,7 @@ func set_volume():
 		set_texture(1)
 		AudioServer.set_bus_volume_db(1, -80)
 	print(config_data.music)
+	
 	
 func _on_Music_pressed():
 	config_data.music = !config_data.music
